@@ -1,0 +1,20 @@
+# CODEOWNERS file
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# All contracts require review
+/contracts/                                @acee-chase
+
+# Security-critical files
+/audits/                                   @acee-chase
+/SECURITY.md                               @acee-chase
+
+# Deployment scripts
+/scripts/deploy-*.ts                       @acee-chase
+/scripts/deploy-*.js                       @acee-chase
+
+# Hardhat configuration
+/hardhat.config.*                          @acee-chase
+
+# Standards (require review for changes)
+/docs/acee-standards/                      @acee-chase
+

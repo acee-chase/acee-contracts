@@ -6,10 +6,21 @@
 
 Before generating any code, you MUST read and follow:
 
-1. **ACEE Standards** (located in the ACEE meta repo):
-   - `standards/naming.md` - Naming conventions
-   - `standards/terminology.md` - Domain terms
-   - `standards/money-and-ledger.md` - Financial boundaries
+1. **ACEE Standards** (mirrored locally at `docs/acee-standards/`):
+   - `docs/acee-standards/naming.md` - Naming conventions
+   - `docs/acee-standards/terminology.md` - Domain terms
+   - `docs/acee-standards/money-and-ledger.md` - Financial boundaries
+   - `docs/acee-standards/env-vars.md` - Environment variables
+   - `docs/acee-standards/ids-and-keys.md` - ID formats
+   - `docs/acee-standards/time-and-seq.md` - Timestamps
+   - `docs/acee-standards/error-codes.md` - Error codes
+
+**Note**: These are local copies synced from ACEE meta repo. To update, run from ACEE meta repo:
+```bash
+./tools/sync-standards.sh repos/acee-contracts
+```
+
+See `docs/acee-standards/README.md` for sync instructions.
 
 ## Smart Contract Rules
 

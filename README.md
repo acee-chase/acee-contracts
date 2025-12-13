@@ -15,14 +15,25 @@ This repository contains the Solidity smart contracts that power the ACEE platfo
 
 ```
 acee-contracts/
-├── contracts/          # Solidity source files
-├── scripts/           # Deployment scripts
-├── test/              # Contract tests
-├── audits/            # Security audit reports
-├── deployments/       # Deployment artifacts by network
-├── .cursor/           # AI assistant rules
-└── hardhat.config.ts  # Hardhat configuration
+├── contracts/                # Solidity source files
+├── scripts/                  # Deployment scripts
+├── test/                     # Contract tests
+├── audits/                   # Security audit reports
+├── deployments/              # Deployment artifacts by network
+├── docs/acee-standards/      # ACEE standards (synced from meta repo)
+├── .cursor/                  # AI assistant rules
+└── hardhat.config.ts         # Hardhat configuration
 ```
+
+## Standards Compliance
+
+This repository follows [ACEE Standards](docs/acee-standards/README.md):
+- Naming conventions
+- Terminology
+- Error codes
+- Financial boundaries
+
+See `.cursor/rules.md` for AI assistant guidelines.
 
 ## Getting Started
 
