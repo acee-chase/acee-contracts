@@ -1,6 +1,10 @@
 # acee-contracts
 
+> This repository is part of the **ACEE platform**.
+
 > Public smart contracts for the ACEE ecosystem.
+
+**Naming Conventions**: See [docs/ops/NAMING_CONVENTIONS.md](docs/ops/NAMING_CONVENTIONS.md) (mirror) for authoritative naming rules. **Canonical source**: `acee-chase/ACEE` → `standards/NAMING_CONVENTIONS.md`.
 
 ## Overview
 
