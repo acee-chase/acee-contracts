@@ -1,91 +1,37 @@
-# ACEE Contracts Project Standards
+# ACEE Project Standards
 
-> This file enforces company-wide standards for AI assistants working on ACEE smart contracts.
+> This file enforces company-wide standards for AI assistants working on ACEE projects.
 
 ## Required Standards (MUST Follow)
 
 Before generating any code, you MUST read and follow:
 
-1. **ACEE Standards** (mirrored locally at `docs/acee-standards/`):
-   - `docs/acee-standards/naming.md` - Naming conventions
-   - `docs/acee-standards/terminology.md` - Domain terms
-   - `docs/acee-standards/money-and-ledger.md` - Financial boundaries
-   - `docs/acee-standards/env-vars.md` - Environment variables
-   - `docs/acee-standards/ids-and-keys.md` - ID formats
-   - `docs/acee-standards/time-and-seq.md` - Timestamps
-   - `docs/acee-standards/error-codes.md` - Error codes
+0. **Naming Conventions (Canon v1)** - **CRITICAL**: All naming decisions must follow:
+   - `docs/ops/NAMING_CONVENTIONS.md` - **Authoritative naming canon** (mirror) for company, platform, products, repos, services, env vars, and identifiers
+   - **Canonical source**: `acee-chase/ACEE` → `standards/NAMING_CONVENTIONS.md` (ACEE meta repo)
+   - **MUST** use ACEE top-level namespace for infrastructure (env groups, canonical env vars)
+   - **MUST** describe ProofOfInfluence as a module under ACEE platform
+   - **MUST NOT** introduce new `proofofinfluence-*` or `poi-<env>-*` top-level infra names
+   - Env groups must follow pattern: `acee-<module>-<env>-<purpose>` (e.g., `acee-contracts-prod-config`)
+   - Canonical cross-service env vars must use `ACEE_*` prefix (e.g., `ACEE_API_BASE_URL`)
 
-**Note**: These are local copies synced from ACEE meta repo. To update, run from ACEE meta repo:
-```bash
-./tools/sync-standards.sh repos/acee-contracts
-```
+1. **ACEE Standards** (located in the ACEE meta repo or `docs/acee-standards/`):
+   - `standards/naming.md` - Field names, database columns, environment variables
+   - `standards/terminology.md` - Domain terms (do NOT invent new terms)
+   - `standards/env-vars.md` - Environment variable ownership
+   - `standards/ids-and-keys.md` - ID formats, idempotency rules
+   - `standards/money-and-ledger.md` - Financial boundaries
+   - `standards/time-and-seq.md` - Timestamps and sequencing
+   - `standards/error-codes.md` - Error codes
 
-See `docs/acee-standards/README.md` for sync instructions.
+## Golden Rules
 
-## Smart Contract Rules
-
-### Naming Conventions
-- Contract names: PascalCase (`POIToken`, `StakingRewards`)
-- Function names: camelCase (`stake`, `withdraw`, `getBalance`)
-- Events: PascalCase (`Staked`, `Withdrawn`, `RewardPaid`)
-- Constants: SCREAMING_SNAKE_CASE (`MAX_SUPPLY`, `REWARD_RATE`)
-
-### Security Requirements
-1. All external calls use checks-effects-interactions pattern
-2. Use OpenZeppelin contracts where applicable
-3. Emit events for all state changes
-4. Include NatSpec documentation
-5. Comprehensive test coverage (>90%)
-
-### Code Style
-```solidity
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
-
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-
-/**
- * @title POIToken
- * @notice Proof of Influence governance token
- * @dev ERC20 with governance extensions
- */
-contract POIToken is ERC20 {
-    uint256 public constant MAX_SUPPLY = 1_000_000_000 * 10**18;
-    
-    event TokensMinted(address indexed to, uint256 amount);
-    
-    constructor() ERC20("Proof of Influence", "POI") {
-        // Constructor logic
-    }
-    
-    /**
-     * @notice Mint new tokens
-     * @param to Recipient address
-     * @param amount Amount to mint
-     */
-    function mint(address to, uint256 amount) external onlyOwner {
-        require(totalSupply() + amount <= MAX_SUPPLY, "Exceeds max supply");
-        _mint(to, amount);
-        emit TokensMinted(to, amount);
-    }
-}
-```
-
-## Testing Requirements
-
-1. Unit tests for all functions
-2. Integration tests for workflows
-3. Fuzz testing for critical functions
-4. Gas optimization tests
-
-## Deployment Requirements
-
-1. Deploy to testnet first
-2. Verify contracts on block explorer
-3. Document deployment addresses
-4. Update deployments/ directory
+1. **DO NOT** invent new field names if working names exist
+2. **DO NOT** invent new terminology - use exact terms from standards
+3. **Follow existing patterns** - derive from standards, not imagination
+4. **Security first** - All contracts must be audited before mainnet deployment
 
 ---
 
-*These rules are derived from ACEE standards and must be followed by all AI assistants.*
-
+**Last Updated**: 2025-12-13  
+**Maintainer**: ACEE Engineering
