@@ -13,35 +13,38 @@ import { ethers } from "hardhat";
 import * as fs from "fs";
 import * as path from "path";
 
-interface DeploymentInfo {
-  contracts: {
-    MockUSDC: string;
-    MockRENTToken: string;
-    RENTDistribution: string;
-  };
+interface DeploymentManifest {
+  network: string;
+  chainId: number;
+  deployer: string;
   treasury: string;
+  contracts: {
+    MockUSDC: { address: string; version: string };
+    MockRENTToken: { address: string; version: string };
+    RENTDistribution: { address: string; version: string };
+  };
 }
 
 async function main() {
   const [deployer] = await ethers.getSigners();
   console.log("Running demo with account:", deployer.address);
 
-  // Load deployment info
+  // Load deployment info (SSOT format)
   const network = await ethers.provider.getNetwork();
   const networkName = network.chainId === 84532n ? "base-sepolia" : "base-mainnet";
-  const deploymentPath = path.join(__dirname, "..", "deployments", networkName, "ssf-deployment.json");
+  const deploymentPath = path.join(__dirname, "..", "deployments", `${networkName}.json`);
   
   if (!fs.existsSync(deploymentPath)) {
     throw new Error(`Deployment not found at ${deploymentPath}. Run deploy-testnet.ts first.`);
   }
 
-  const deployment: DeploymentInfo = JSON.parse(fs.readFileSync(deploymentPath, "utf8"));
+  const deployment: DeploymentManifest = JSON.parse(fs.readFileSync(deploymentPath, "utf8"));
   console.log("Loaded deployment from:", deploymentPath);
 
   // Get contract instances
-  const usdc = await ethers.getContractAt("MockUSDC", deployment.contracts.MockUSDC);
-  const rentToken = await ethers.getContractAt("MockRENTToken", deployment.contracts.MockRENTToken);
-  const distribution = await ethers.getContractAt("RENTDistribution", deployment.contracts.RENTDistribution);
+  const usdc = await ethers.getContractAt("MockUSDC", deployment.contracts.MockUSDC.address);
+  const rentToken = await ethers.getContractAt("MockRENTToken", deployment.contracts.MockRENTToken.address);
+  const distribution = await ethers.getContractAt("RENTDistribution", deployment.contracts.RENTDistribution.address);
 
   console.log("\n" + "=".repeat(60));
   console.log("DEMO: USDC Subscribe → Deposit → Claim");
@@ -67,7 +70,7 @@ async function main() {
   const depositAmount = ethers.parseUnits("1000", 6);
   
   // Approve
-  const approveTx = await usdc.approve(deployment.contracts.RENTDistribution, depositAmount);
+  const approveTx = await usdc.approve(deployment.contracts.RENTDistribution.address, depositAmount);
   await approveTx.wait();
   console.log("  Approved. Tx:", approveTx.hash);
 
@@ -104,6 +107,7 @@ async function main() {
   console.log("=".repeat(60));
   console.log("Transaction Hashes (for DB record):");
   console.log("  startPeriod:    ", startTx.hash);
+  console.log("  approve:        ", approveTx.hash);
   console.log("  deposit:        ", depositTx.hash);
   console.log("  finalizePeriod: ", finalizeTx.hash);
   console.log("  claim:          ", claimTx.hash);
@@ -118,13 +122,14 @@ async function main() {
     claimAmount: ethers.formatUnits(claimable, 6),
     transactions: {
       startPeriod: startTx.hash,
+      approve: approveTx.hash,
       deposit: depositTx.hash,
       finalizePeriod: finalizeTx.hash,
       claim: claimTx.hash,
     },
   };
 
-  const demoResultsPath = path.join(__dirname, "..", "deployments", networkName, "demo-results.json");
+  const demoResultsPath = path.join(__dirname, "..", "deployments", `${networkName}-demo-results.json`);
   fs.writeFileSync(demoResultsPath, JSON.stringify(demoResults, null, 2));
   console.log("\nDemo results saved to:", demoResultsPath);
 }
