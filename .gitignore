@@ -24,3 +24,8 @@ coverage.json
 *.swp
 *.swo
 *.tsbuildinfo
+
+# Deployments: keep SSOT, ignore other generated artifacts
+deployments/*
+!deployments/base-sepolia.json
+!deployments/README.md

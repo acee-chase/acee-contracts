@@ -102,13 +102,12 @@ async function main() {
     treasuryAddress,
     deployer.address
   );
-  const rentDistReceipt = await rentDistribution.deploymentTransaction()?.wait();
+  const rentDistReceipt = await rentDistribution.deploymentTransaction()?.wait(2); // Wait for 2 confirmations
   const rentDistributionAddress = await rentDistribution.getAddress();
-  const rentVersion = await rentDistribution.VERSION();
   console.log("   RENTDistribution deployed to:", rentDistributionAddress);
-  console.log("   Version:", rentVersion);
+  console.log("   Version: RENTDistribution@1.0.0");
   contracts["RENTDistribution"] = {
-    version: rentVersion,
+    version: "RENTDistribution@1.0.0",
     address: rentDistributionAddress,
     deployTx: rentDistReceipt?.hash || "",
     deployedAt: new Date().toISOString(),
@@ -123,13 +122,12 @@ async function main() {
     treasuryAddress,
     deployer.address
   );
-  const appDistReceipt = await appDistribution.deploymentTransaction()?.wait();
+  const appDistReceipt = await appDistribution.deploymentTransaction()?.wait(2); // Wait for 2 confirmations
   const appDistributionAddress = await appDistribution.getAddress();
-  const appVersion = await appDistribution.VERSION();
   console.log("   APPDistribution deployed to:", appDistributionAddress);
-  console.log("   Version:", appVersion);
+  console.log("   Version: APPDistribution@1.0.0");
   contracts["APPDistribution"] = {
-    version: appVersion,
+    version: "APPDistribution@1.0.0",
     address: appDistributionAddress,
     deployTx: appDistReceipt?.hash || "",
     deployedAt: new Date().toISOString(),
