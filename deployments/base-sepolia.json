@@ -3,7 +3,7 @@
   "chainId": 84532,
   "deployer": "0x3De7B44eab1BD638ff3465d71a7FdFEA8c3b5E25",
   "treasury": "0x3De7B44eab1BD638ff3465d71a7FdFEA8c3b5E25",
-  "updatedAt": "2026-01-12T01:56:57.397Z",
+  "updatedAt": "2026-01-12T04:40:03.667Z",
   "contracts": {
     "MockUSDC": {
       "version": "1.0.0",
@@ -46,6 +46,12 @@
       "address": "0x1f7bc320d76F0aa8D9A8f38e991766E5f189DAc2",
       "deployTx": "0x0c3ed33295183f144342259eeeb18836abd092300a038a0eb139680dc47fcb73",
       "deployedAt": "2026-01-12T01:56:57.397Z"
+    },
+    "RENTDistribution_SSFShareToken": {
+      "version": "RENTDistribution@1.0.0",
+      "address": "0x03049F81f054B0504A62b4093A70512C9284BE4f",
+      "deployTx": "0x4bd794e250ccc0b05dfc92c1db2bd0829b14ee94b37e654e85bd360f943e7089",
+      "deployedAt": "2026-01-12T04:40:03.667Z"
     }
   }
 }
