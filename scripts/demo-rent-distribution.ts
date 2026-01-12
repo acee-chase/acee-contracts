@@ -64,7 +64,13 @@ async function main() {
   
   // IMPORTANT: Parse periodId from PeriodStarted event instead of currentPeriodId()
   // This avoids RPC state delay issues where currentPeriodId() may return stale data
+  // Pattern: "Event-driven ID sourcing" - always use receipt events as SSOT for IDs
+  const distributionAddress = await distribution.getAddress();
   const periodStartedEvent = startReceipt?.logs.find((log) => {
+    // Filter by contract address first (skip unrelated contract logs)
+    if (log.address.toLowerCase() !== distributionAddress.toLowerCase()) {
+      return false;
+    }
     try {
       const parsed = distribution.interface.parseLog({
         topics: log.topics as string[],
@@ -72,6 +78,7 @@ async function main() {
       });
       return parsed?.name === "PeriodStarted";
     } catch {
+      // parseLog throws on unknown selectors; safe to skip
       return false;
     }
   });
