@@ -28,4 +28,5 @@ coverage.json
 # Deployments: keep SSOT, ignore other generated artifacts
 deployments/*
 !deployments/base-sepolia.json
+!deployments/base-mainnet.json
 !deployments/README.md
