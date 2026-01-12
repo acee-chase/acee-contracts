@@ -11,6 +11,8 @@
     "demo:testnet": "hardhat run scripts/demo-rent-distribution.ts --network base-sepolia",
     "deploy:share:testnet": "hardhat run scripts/deploy-share-sale-testnet.ts --network base-sepolia",
     "demo:share:testnet": "hardhat run scripts/demo-share-sale.ts --network base-sepolia",
+    "deploy:rentdist-share:testnet": "hardhat run scripts/deploy-rentdist-sharetoken-testnet.ts --network base-sepolia",
+    "demo:rentdist-share:testnet": "hardhat run scripts/demo-rentdist-sharetoken.ts --network base-sepolia",
     "verify": "hardhat verify"
   },
   "keywords": [
