@@ -1,0 +1,31 @@
+{
+  "name": "acee-contracts",
+  "version": "1.0.0",
+  "description": "ACEE Platform smart contracts",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:local": "hardhat run scripts/deploy-testnet.ts --network hardhat",
+    "deploy:testnet": "hardhat run scripts/deploy-testnet.ts --network base-sepolia",
+    "demo:testnet": "hardhat run scripts/demo-rent-distribution.ts --network base-sepolia",
+    "verify": "hardhat verify"
+  },
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "base",
+    "rwa"
+  ],
+  "author": "ACEE Ventures",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "dotenv": "^16.0.0",
+    "hardhat": "^2.22.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "network": "base-sepolia",
+  "chainId": 84532,
+  "deployer": "0x3De7B44eab1BD638ff3465d71a7FdFEA8c3b5E25",
+  "treasury": "0x3De7B44eab1BD638ff3465d71a7FdFEA8c3b5E25",
+  "updatedAt": "2026-01-11T23:48:20.442Z",
+  "contracts": {
+    "MockUSDC": {
+      "version": "1.0.0",
+      "address": "0x264317fF0788B04A6Dd523D7B2444Def50c655ce",
+      "deployTx": "0x0a2085a5315ac6bc0f2126711314664e0563d3a1f6b0d3ef7ef2f8596817b527",
+      "deployedAt": "2026-01-11T23:48:08.174Z"
+    },
+    "MockRENTToken": {
+      "version": "1.0.0",
+      "address": "0x911cdB8158fEB8a5803B4017072bbeEd77408773",
+      "deployTx": "0x18018f7dfbdd40cb982f183ce09d0a1d6dee0c545236d290340eb833b7c86c19",
+      "deployedAt": "2026-01-11T23:48:08.964Z"
+    },
+    "MockAPPToken": {
+      "version": "1.0.0",
+      "address": "0xB9c7B01aE4D82d511C6F6bEF952d2d8a491aF7d9",
+      "deployTx": "0x1eb239453cf41a19ae3579793ddff54e42ce35cd777f2321f86ea46e4c97bf29",
+      "deployedAt": "2026-01-11T23:48:09.986Z"
+    },
+    "RENTDistribution": {
+      "version": "RENTDistribution@1.0.0",
+      "address": "0x16f194949fA6d847A0c829B1f7493b5b616f47E1",
+      "deployTx": "0xd94f288908335d1b5518c28265d9cb0baa6b37d9d3c5071d7730afcd0daf52cf",
+      "deployedAt": "2026-01-11T23:48:14.634Z"
+    },
+    "APPDistribution": {
+      "version": "APPDistribution@1.0.0",
+      "address": "0x0DcE8df6bd2Bca451ab29fB04851c91e33d4f363",
+      "deployTx": "0x21642dc202a5c00e30c60bb36ad7f76967124275a7e23244e5e307508dc49037",
+      "deployedAt": "2026-01-11T23:48:18.563Z"
+    }
+  }
+}
