@@ -58,10 +58,34 @@ async function main() {
   console.log("  Deployer RENT-SEN: ", ethers.formatUnits(deployerRentBalance, 18));
 
   // Step 2: Start a new distribution period
-  console.log("\n[Step 2] Starting Period 1...");
+  console.log("\n[Step 2] Starting new period...");
   const startTx = await distribution.startPeriod();
-  await startTx.wait();
-  const currentPeriodId = await distribution.currentPeriodId();
+  const startReceipt = await startTx.wait();
+  
+  // IMPORTANT: Parse periodId from PeriodStarted event instead of currentPeriodId()
+  // This avoids RPC state delay issues where currentPeriodId() may return stale data
+  const periodStartedEvent = startReceipt?.logs.find((log) => {
+    try {
+      const parsed = distribution.interface.parseLog({
+        topics: log.topics as string[],
+        data: log.data,
+      });
+      return parsed?.name === "PeriodStarted";
+    } catch {
+      return false;
+    }
+  });
+  
+  if (!periodStartedEvent) {
+    throw new Error("PeriodStarted event not found in transaction receipt");
+  }
+  
+  const parsedEvent = distribution.interface.parseLog({
+    topics: periodStartedEvent.topics as string[],
+    data: periodStartedEvent.data,
+  });
+  const currentPeriodId = parsedEvent!.args.periodId;
+  
   console.log("  Period started. ID:", currentPeriodId.toString());
   console.log("  Tx:", startTx.hash);
 
@@ -80,15 +104,27 @@ async function main() {
   console.log("  Deposited 1,000 USDC. Tx:", depositTx.hash);
 
   // Step 4: Finalize period
-  console.log("\n[Step 4] Finalizing Period 1...");
+  console.log("\n[Step 4] Finalizing Period", currentPeriodId.toString(), "...");
   const finalizeTx = await distribution.finalizePeriod();
   await finalizeTx.wait();
   console.log("  Period finalized. Tx:", finalizeTx.hash);
 
   // Step 5: Check claimable amount
+  // Small delay to ensure RPC state is synced (workaround for RPC propagation delay)
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  
   console.log("\n[Step 5] Checking claimable amount...");
+  console.log("  Using periodId:", currentPeriodId.toString());
   const claimable = await distribution.getClaimable(deployer.address, currentPeriodId);
   console.log("  Deployer claimable:", ethers.formatUnits(claimable, 6), "USDC");
+  
+  if (claimable === 0n) {
+    console.log("  ⚠️  Warning: Claimable is 0. Checking period state...");
+    const period = await distribution.periods(currentPeriodId);
+    console.log("    finalized:", period.finalized);
+    console.log("    snapshotSupply:", ethers.formatUnits(period.snapshotSupply, 18));
+    console.log("    totalDeposited:", ethers.formatUnits(period.totalDeposited, 6));
+  }
 
   // Step 6: Claim
   console.log("\n[Step 6] Claiming...");
