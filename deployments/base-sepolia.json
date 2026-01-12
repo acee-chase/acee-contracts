@@ -3,7 +3,7 @@
   "chainId": 84532,
   "deployer": "0x3De7B44eab1BD638ff3465d71a7FdFEA8c3b5E25",
   "treasury": "0x3De7B44eab1BD638ff3465d71a7FdFEA8c3b5E25",
-  "updatedAt": "2026-01-11T23:48:20.442Z",
+  "updatedAt": "2026-01-12T01:56:57.397Z",
   "contracts": {
     "MockUSDC": {
       "version": "1.0.0",
@@ -34,6 +34,18 @@
       "address": "0x0DcE8df6bd2Bca451ab29fB04851c91e33d4f363",
       "deployTx": "0x21642dc202a5c00e30c60bb36ad7f76967124275a7e23244e5e307508dc49037",
       "deployedAt": "2026-01-11T23:48:18.563Z"
+    },
+    "SSFShareToken": {
+      "version": "SSFShareToken@1.0.0",
+      "address": "0xc10CA2551c5ebC6862Cb6Dc08AB3e82BF1a0A3F2",
+      "deployTx": "0xd899e0bb7d721f1f32fc0da5fda7be513f42328d4bde8ae6222135ba79329581",
+      "deployedAt": "2026-01-12T01:56:57.396Z"
+    },
+    "SSFShareSale": {
+      "version": "SSFShareSale@1.0.0",
+      "address": "0x1f7bc320d76F0aa8D9A8f38e991766E5f189DAc2",
+      "deployTx": "0x0c3ed33295183f144342259eeeb18836abd092300a038a0eb139680dc47fcb73",
+      "deployedAt": "2026-01-12T01:56:57.397Z"
     }
   }
 }
