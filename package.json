@@ -8,9 +8,7 @@
     "test": "hardhat test",
     "deploy:local": "hardhat run scripts/deploy-testnet.ts --network hardhat",
     "deploy:testnet": "hardhat run scripts/deploy-testnet.ts --network base-sepolia",
-    "deploy:mainnet": "hardhat run scripts/deploy-mainnet.ts --network base-mainnet",
     "demo:testnet": "hardhat run scripts/demo-rent-distribution.ts --network base-sepolia",
-    "demo:mainnet": "hardhat run scripts/demo-rent-distribution.ts --network base-mainnet",
     "verify": "hardhat verify"
   },
   "keywords": [
