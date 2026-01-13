@@ -19,7 +19,11 @@
  * Usage:
  * npx hardhat run scripts/deploy-ssf-v1-production.ts --network base-mainnet
  * 
- * IMPORTANT: Review CONFIG before running!
+ * Network key in hardhat.config.ts: "base-mainnet" (chainId 8453)
+ * 
+ * IMPORTANT: 
+ * - Review CONFIG before running!
+ * - Script REFUSES to deploy if chainId != 8453 (unless dryRun=true)
  */
 
 import { ethers } from "hardhat";
@@ -68,10 +72,13 @@ async function main() {
   
   // Validate chain ID (Base Mainnet = 8453)
   const chainId = (await ethers.provider.getNetwork()).chainId;
+  
+  if (!CONFIG.dryRun && chainId !== 8453n) {
+    throw new Error(`FATAL: Refusing to deploy — expected Base Mainnet chainId=8453, got ${chainId}`);
+  }
+  
   if (chainId !== 8453n) {
-    console.warn(`\n⚠️  WARNING: Not on Base Mainnet (chainId ${chainId})`);
-    console.warn(`   Expected chainId: 8453`);
-    console.warn(`   Proceeding anyway... (use for testnet simulation)`);
+    console.warn(`\n⚠️  WARNING: Not on Base Mainnet (chainId ${chainId}) — dryRun only`);
   }
   
   if (balance < ethers.parseEther("0.02")) {
