@@ -34,8 +34,10 @@
 
 | Wallet | Address | Source | Status | Tags |
 |--------|---------|--------|--------|------|
-| **SMOKE_1** | TBD | `test_wallets` or `vault_wallets` | `in_use` | `["smoke","mainnet-ssf-v1"]` |
-| **SMOKE_2** | TBD | `test_wallets` or `vault_wallets` | `in_use` | `["smoke","mainnet-ssf-v1"]` |
+| **SMOKE_1** | `0x3a13D75C173D7321f8310A0E6F8Bc070afa2d80E` | Phantom (user) | `in_use` | `["smoke","mainnet-ssf-v1"]` |
+| **SMOKE_2** | (Optional - user to provide if needed) | - | - | - |
+
+> **Note**: SMOKE_1 is sufficient for initial smoke test. SMOKE_2 can be added later if needed.
 
 > **Selection Criteria**:
 > - Must be from `test_wallets` or `vault_wallets(role='test')`
