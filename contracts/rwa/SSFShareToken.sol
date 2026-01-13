@@ -16,8 +16,12 @@ contract SSFShareToken is ERC20, AccessControl {
     // ============ VERSION ============
     string public constant VERSION = "SSFShareToken@1.0.0";
     
+    // ============ CONSTANTS ============
+    uint256 public constant MAX_SUPPLY = 20_000;
+    
     // ============ ROLES ============
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+    bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
     
     // ============ EVENTS ============
     event Deployed(string version, uint256 chainId, address deployer, uint256 deployedAt);
@@ -54,7 +58,18 @@ contract SSFShareToken is ERC20, AccessControl {
      * @param shares Number of shares to mint
      */
     function mint(address to, uint256 shares) external onlyRole(MINTER_ROLE) {
+        require(totalSupply() + shares <= MAX_SUPPLY, "SSFShareToken: exceeds max supply");
         _mint(to, shares);
+    }
+    
+    /**
+     * @notice Burn shares from an address
+     * @dev Only callable by BURNER_ROLE (ReserveVault contract)
+     * @param from Address to burn from
+     * @param shares Number of shares to burn
+     */
+    function burnFrom(address from, uint256 shares) external onlyRole(BURNER_ROLE) {
+        _burn(from, shares);
     }
 }
 
