@@ -52,6 +52,23 @@
       "address": "0x03049F81f054B0504A62b4093A70512C9284BE4f",
       "deployTx": "0x4bd794e250ccc0b05dfc92c1db2bd0829b14ee94b37e654e85bd360f943e7089",
       "deployedAt": "2026-01-12T04:40:03.667Z"
+    },
+    "SSFShareToken_V1": {
+      "version": "SSFShareToken@1.0.0-v1",
+      "address": "0x0a0bFE2582B99D27f5A9aB201318fb6943aa7040",
+      "deployedAt": "2026-01-13T22:41:03.000Z"
+    },
+    "SSFReserveVault": {
+      "version": "SSFReserveVault@1.0.0",
+      "address": "0xdc94374Dc7ebCe29bC0ab17b1C7e09D3aC512D92",
+      "deployedAt": "2026-01-13T22:41:20.000Z"
+    },
+    "SSFShareSale_V1": {
+      "version": "SSFShareSale@1.0.0-v1",
+      "address": "0xF6F06fBA3Bb0828f4ae7D00178147230C2b16d72",
+      "saleStart": 1736808123,
+      "saleEnd": 1737412923,
+      "deployedAt": "2026-01-13T22:42:03.000Z"
     }
   }
 }
