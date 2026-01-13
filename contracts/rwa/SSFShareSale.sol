@@ -14,13 +14,14 @@ interface ISSFShareToken {
 /**
  * @title SSFShareSale
  * @notice Allowlist-based share sale accepting USDC for ShareTokens
- * @dev USDC flows directly to treasury (contract never holds funds)
+ * @dev USDC splits: 50% to treasury, 50% to reserveVault
  * 
  * FROZEN SALE PARAMETERS (v1):
- *   - Price: 10,000 USDC per share
- *   - Max shares: 2,000 (total cap 20M USDC)
- *   - Per-wallet cap: 10 shares (100K USDC)
- *   - Allowlist capacity: 10 addresses
+ *   - Price: 1,000 USDC per share
+ *   - Max shares: 20,000 (total cap 20M USDC)
+ *   - Per-wallet cap: 1,000 shares (1M USDC)
+ *   - Allowlist capacity: 100 addresses
+ *   - Reserve split: 50% to ReserveVault
  * 
  * IMMUTABLE CONTRACT - No proxy upgradeability.
  * Future iterations via versioned deployments (V1/V2/...).
@@ -32,15 +33,17 @@ contract SSFShareSale is Ownable, Pausable, ReentrancyGuard {
     string public constant VERSION = "SSFShareSale@1.0.0";
     
     // ============ FROZEN PARAMETERS ============
-    uint256 public constant PRICE_PER_SHARE_USDC = 10_000_000_000; // 10,000 USDC (6 decimals)
-    uint256 public constant MAX_SHARES = 2_000;
-    uint256 public constant MAX_SHARES_PER_WALLET = 10;
-    uint256 public constant MAX_ALLOWLIST = 10;
+    uint256 public constant PRICE_PER_SHARE_USDC = 1_000_000_000; // 1,000 USDC (6 decimals)
+    uint256 public constant MAX_SHARES = 20_000;
+    uint256 public constant MAX_SHARES_PER_WALLET = 1_000;
+    uint256 public constant MAX_ALLOWLIST = 100;
+    uint256 public constant RESERVE_BPS = 5_000; // 50% to reserve vault
     
     // ============ IMMUTABLES ============
     IERC20 public immutable usdc;
     ISSFShareToken public immutable shareToken;
     address public immutable treasury;
+    address public immutable reserveVault;
     
     // ============ STATE ============
     uint64 public saleStart;
@@ -71,12 +74,13 @@ contract SSFShareSale is Ownable, Pausable, ReentrancyGuard {
     constructor(
         address _usdc,
         address _shareToken,
+        address _reserveVault,
         address _treasury,
         address _owner,
         uint64 _saleStart,
         uint64 _saleEnd
     ) Ownable(_owner) {
-        if (_usdc == address(0) || _shareToken == address(0) || _treasury == address(0)) {
+        if (_usdc == address(0) || _shareToken == address(0) || _treasury == address(0) || _reserveVault == address(0)) {
             revert ZeroAddress();
         }
         if (_saleEnd <= _saleStart) {
@@ -85,6 +89,7 @@ contract SSFShareSale is Ownable, Pausable, ReentrancyGuard {
         
         usdc = IERC20(_usdc);
         shareToken = ISSFShareToken(_shareToken);
+        reserveVault = _reserveVault;
         treasury = _treasury;
         saleStart = _saleStart;
         saleEnd = _saleEnd;
@@ -129,11 +134,14 @@ contract SSFShareSale is Ownable, Pausable, ReentrancyGuard {
             revert SaleCapExceeded();
         }
         
-        // 6. Calculate cost
+        // 6. Calculate cost and split
         uint256 cost = shares * PRICE_PER_SHARE_USDC;
+        uint256 reserveAmount = (cost * RESERVE_BPS) / 10_000;
+        uint256 treasuryAmount = cost - reserveAmount;
         
-        // 7. Transfer USDC directly to treasury (contract never holds funds)
-        usdc.safeTransferFrom(msg.sender, treasury, cost);
+        // 7. Transfer USDC: 50% to treasury, 50% to reserveVault
+        usdc.safeTransferFrom(msg.sender, treasury, treasuryAmount);
+        usdc.safeTransferFrom(msg.sender, reserveVault, reserveAmount);
         
         // 8. Update state
         purchasedShares[msg.sender] += shares;
