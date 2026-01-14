@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const PRIVATE_KEY = process.env.DEPLOYER_PRIVATE_KEY || "0x0000000000000000000000000000000000000000000000000000000000000001";
-const BASESCAN_API_KEY = process.env.BASESCAN_API_KEY || "";
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || process.env.BASESCAN_API_KEY || "";
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -33,28 +33,10 @@ const config: HardhatUserConfig = {
     },
   },
   etherscan: {
-    apiKey: {
-      "base-sepolia": BASESCAN_API_KEY,
-      "base-mainnet": BASESCAN_API_KEY,
-    },
-    customChains: [
-      {
-        network: "base-sepolia",
-        chainId: 84532,
-        urls: {
-          apiURL: "https://api-sepolia.basescan.org/api",
-          browserURL: "https://sepolia.basescan.org",
-        },
-      },
-      {
-        network: "base-mainnet",
-        chainId: 8453,
-        urls: {
-          apiURL: "https://api.basescan.org/api",
-          browserURL: "https://basescan.org",
-        },
-      },
-    ],
+    apiKey: ETHERSCAN_API_KEY,
+  },
+  sourcify: {
+    enabled: false,
   },
   paths: {
     sources: "./contracts",
@@ -65,4 +47,3 @@ const config: HardhatUserConfig = {
 };
 
 export default config;
-

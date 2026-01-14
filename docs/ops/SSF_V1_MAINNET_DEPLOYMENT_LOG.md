@@ -1,6 +1,6 @@
 # SSF V1 Mainnet Deployment Log
 
-> **Status**: ✅ DEPLOYED + SMOKE TEST COMPLETE  
+> **Status**: ✅ DEPLOYED + SMOKE TEST + VERIFIED  
 > **Deployment Date**: 2026-01-14  
 > **Network**: Base Mainnet (Chain ID: 8453)  
 > **Deployer**: `0x3De7B44eab1BD638ff3465d71a7FdFEA8c3b5E25`
@@ -9,11 +9,11 @@
 
 ## Contract Addresses
 
-| Contract | Address | Basescan |
+| Contract | Address | Verified |
 |----------|---------|----------|
-| **SSFShareToken** | `0xB6c38Ef75401695db928ef124D9e430b923B2546` | [View](https://basescan.org/address/0xB6c38Ef75401695db928ef124D9e430b923B2546) |
-| **SSFReserveVault** | `0x61C750787b63f8D5E1640cc0115E22aEe4CABeB3` | [View](https://basescan.org/address/0x61C750787b63f8D5E1640cc0115E22aEe4CABeB3) |
-| **SSFShareSale** | `0x52DbEa06AEb510E54b52C029eF7bD82cd33Ac5c4` | [View](https://basescan.org/address/0x52DbEa06AEb510E54b52C029eF7bD82cd33Ac5c4) |
+| **SSFShareToken** | `0xB6c38Ef75401695db928ef124D9e430b923B2546` | [✅ View Code](https://basescan.org/address/0xB6c38Ef75401695db928ef124D9e430b923B2546#code) |
+| **SSFReserveVault** | `0x61C750787b63f8D5E1640cc0115E22aEe4CABeB3` | [✅ View Code](https://basescan.org/address/0x61C750787b63f8D5E1640cc0115E22aEe4CABeB3#code) |
+| **SSFShareSale** | `0x52DbEa06AEb510E54b52C029eF7bD82cd33Ac5c4` | [✅ View Code](https://basescan.org/address/0x52DbEa06AEb510E54b52C029eF7bD82cd33Ac5c4#code) |
 
 ---
 
@@ -74,5 +74,5 @@
 
 ---
 
-**Last Updated**: 2026-01-14 02:10 UTC  
+**Last Updated**: 2026-01-14 02:15 UTC  
 **Maintainer**: ACEE Engineering
