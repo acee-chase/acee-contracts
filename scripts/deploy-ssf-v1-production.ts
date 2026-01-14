@@ -44,7 +44,7 @@ const CONFIG = {
   tokenSymbol: "SSF",
 
   // Sale timing
-  saleDelayHours: 72, // 72 hours after deployment
+  saleDelayHours: 0, // IMMEDIATE - set to 0 for today's smoke test
   saleDurationDays: 90, // 90 day sale window
 
   // Rate limit for redemptions
@@ -167,7 +167,8 @@ async function main() {
   console.log("       Owner: TREASURY");
 
   const now = Math.floor(Date.now() / 1000);
-  const saleStart = now + (CONFIG.saleDelayHours * 60 * 60);
+  // saleStart = now - 60 to ensure immediate buyability (smoke test today)
+  const saleStart = now - 60;
   const saleEnd = saleStart + (CONFIG.saleDurationDays * 24 * 60 * 60);
 
   console.log(`       Sale Start: ${new Date(saleStart * 1000).toISOString()}`);
