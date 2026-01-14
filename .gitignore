@@ -30,3 +30,6 @@ deployments/*
 !deployments/base-sepolia.json
 !deployments/base-mainnet.json
 !deployments/README.md
+
+# Private SSOT (never commit)
+private/

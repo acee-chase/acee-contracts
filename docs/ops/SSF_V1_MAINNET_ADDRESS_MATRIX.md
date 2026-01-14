@@ -37,13 +37,7 @@
 | **SMOKE_1** | `0x3a13D75C173D7321f8310A0E6F8Bc070afa2d80E` | User-controlled | `in_use` | `["smoke","mainnet-ssf-v1"]` |
 | **SMOKE_2** | `0x3CBE9851fA5e5CdaF7dB1ae8Eef8819bB8Ecca32` | User-controlled | `in_use` | `["smoke","mainnet-ssf-v1"]` |
 
-> **Note**: Private key storage locations are maintained in a separate private SSOT (not committed to git).
-
-> **Selection Criteria**:
-> - Must be from `test_wallets` or `vault_wallets(role='test')`
-> - Status must be `idle` before selection
-> - Must have usable private key
-> - **NOT from `agent_wallets`** (too high attack surface)
+> **Note**: Key material tracked in private SSOT (not committed).
 
 ---
 
@@ -67,7 +61,7 @@
 
 2. **Private Keys**: 
    - **NEVER** commit private keys to this document or any public repository
-   - Private keys are stored in environment variables only
+   - Key material tracked in private SSOT (not committed)
 
 3. **Access Control**:
    - TREASURY has owner role on all contracts
