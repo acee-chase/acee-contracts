@@ -34,10 +34,10 @@
 
 | Wallet | Address | Source | Status | Tags |
 |--------|---------|--------|--------|------|
-| **SMOKE_1** | `0x3a13D75C173D7321f8310A0E6F8Bc070afa2d80E` | Phantom (user) | `in_use` | `["smoke","mainnet-ssf-v1"]` |
-| **SMOKE_2** | `0xdc6a8738c0b8AB2ED33d98b04E9f20280fBA8F55` | POI wallet-matrix (matrix_base_01) | `in_use` | `["smoke","mainnet-ssf-v1"]` |
+| **SMOKE_1** | `0x3a13D75C173D7321f8310A0E6F8Bc070afa2d80E` | User-controlled | `in_use` | `["smoke","mainnet-ssf-v1"]` |
+| **SMOKE_2** | `0x3CBE9851fA5e5CdaF7dB1ae8Eef8819bB8Ecca32` | User-controlled | `in_use` | `["smoke","mainnet-ssf-v1"]` |
 
-> **Note**: SMOKE_2 is from POI's wallet-matrix system. It has Base Mainnet activity (nonce=24) and private key available in `config/wallet-matrix.json`.
+> **Note**: Private key storage locations are maintained in a separate private SSOT (not committed to git).
 
 > **Selection Criteria**:
 > - Must be from `test_wallets` or `vault_wallets(role='test')`
