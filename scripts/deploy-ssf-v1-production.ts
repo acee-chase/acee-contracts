@@ -52,7 +52,7 @@ const CONFIG = {
 
   // Safety flags
   renounceDeployerAdmin: true, // Set false to keep deployer as backup admin
-  dryRun: true, // Set true to simulate without sending tx
+  dryRun: false, // MAINNET DEPLOY - Set false for real deployment
 };
 
 // ============ DEPLOYMENT SCRIPT ============
