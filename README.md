@@ -1,122 +1,35 @@
-# acee-contracts
+# ⚠️ THIS REPOSITORY HAS BEEN ARCHIVED
 
-> This repository is part of the **ACEE platform**.
+> **Migration Date**: 2026-01-19  
+> **New Canonical Location**: [`acee-ventures/acee-contracts`](https://github.com/acee-ventures/acee-contracts) (Private)  
+> **Public Mirror**: [`acee-ventures/acee-contracts-public`](https://github.com/acee-ventures/acee-contracts-public)
 
-> Public smart contracts for the ACEE ecosystem.
+---
 
-**Naming Conventions**: See [docs/ops/NAMING_CONVENTIONS.md](docs/ops/NAMING_CONVENTIONS.md) (mirror) for authoritative naming rules. **Canonical source**: `acee-chase/ACEE` → `standards/NAMING_CONVENTIONS.md`.
+## ❌ Do Not Use This Repository
 
-## Overview
+All contract development has moved to the organization-owned repositories listed above.
 
-This repository contains the Solidity smart contracts that power the ACEE platform, including:
+- For **contract source code and development**: Use `acee-ventures/acee-contracts`
+- For **public/auditor access**: Use `acee-ventures/acee-contracts-public`
+- For **consuming contracts in apps**: Use versioned tags from the public repository
 
-- Token contracts (POI Token)
-- Staking and rewards
-- Escrow and vesting
-- Game-related contracts (future)
+---
 
-## Directory Structure
+## Historical Context
 
-```
-acee-contracts/
-├── contracts/                # Solidity source files
-├── scripts/                  # Deployment scripts
-├── test/                     # Contract tests
-├── audits/                   # Security audit reports
-├── deployments/              # Deployment artifacts by network
-├── docs/acee-standards/      # ACEE standards (synced from meta repo)
-├── .cursor/                  # AI assistant rules
-└── hardhat.config.ts         # Hardhat configuration
-```
+This repository was the original development location for ACEE smart contracts. It has been superseded by organization-owned repositories for:
 
-## Standards Compliance
+1. **Better access control** – Private canonical repository with proper team permissions
+2. **Audit transparency** – Public release-only mirror for external auditors
+3. **Professional structure** – Organization namespace for production contracts
 
-This repository follows [ACEE Standards](docs/acee-standards/README.md):
-- Naming conventions
-- Terminology
-- Error codes
-- Financial boundaries
+---
 
-See `.cursor/rules.md` for AI assistant guidelines.
+## Contact
 
-## Getting Started
+Questions about the migration? Contact the ACEE team or open an issue in `acee-ventures/acee-contracts`.
 
-### Prerequisites
+---
 
-- Node.js >= 18
-- npm or pnpm
-
-### Installation
-
-```bash
-npm install
-```
-
-### Compile Contracts
-
-```bash
-npm run compile
-```
-
-### Run Tests
-
-```bash
-npm test
-```
-
-### Deploy
-
-```bash
-# Local
-npm run deploy:local
-
-# Testnet (Base Sepolia)
-npm run deploy:testnet
-
-# Mainnet (Base)
-npm run deploy:mainnet
-```
-
-## Contracts
-
-### POI Token
-ERC-20 token with governance features.
-
-### Staking Rewards
-Stake POI tokens to earn rewards.
-
-### Escrow
-Secure escrow for transactions.
-
-### Vesting Vault
-Token vesting with configurable schedules.
-
-## Security
-
-### Audits
-All contracts undergo security audits before mainnet deployment. Reports are available in the `audits/` directory.
-
-### Bug Bounty
-Please report security vulnerabilities responsibly. See `SECURITY.md` for details.
-
-## Deployments
-
-### Base Sepolia (Testnet)
-- POI Token: `0x...`
-- Staking: `0x...`
-
-### Base (Mainnet)
-- POI Token: `0x...`
-- Staking: `0x...`
-
-## Standards Compliance
-
-This repository follows [ACEE Standards](https://github.com/acee-chase/ACEE):
-- Naming conventions
-- Security guidelines
-- Testing requirements
-
-## License
-
-MIT License - see [LICENSE](./LICENSE)
-
+*This repository is read-only and will receive no further updates.*
